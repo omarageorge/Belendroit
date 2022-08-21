@@ -5,6 +5,7 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 ## Flutter Packages used
 
 - [http](https://pub.dev/packages/http)
+- [hive](https://pub.dev/packages/hive)
 - [provider](https://pub.dev/packages/provider)
 - [geolocator](https://pub.dev/packages/geolocator)
 - [flutter_local_notifications](flutter_local_notifications)
