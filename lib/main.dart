@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:belendroit/components/bottom_nav.dart';
 import 'package:belendroit/screens/home_screen.dart';
-import 'package:belendroit/screens/liked_screen.dart';
+import 'package:belendroit/screens/bookmark_screen.dart';
 import 'package:belendroit/screens/notifications_screen.dart';
+import 'package:belendroit/screens/user_screen.dart';
 
 void main() => runApp(const MainScreen());
 
@@ -19,7 +20,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = [
     const HomeScreen(),
     const NotificationsScreen(),
-    const LikedScreen(),
+    const BookmarkScreen(),
+    const UserScreen()
   ];
 
   void onTap(int? index) {
@@ -43,9 +45,10 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavBar(currentIndex: _currentIndex, onTap: onTap),
       ),
       routes: {
-        HomeScreen.pageId: (context) => const HomeScreen(),
-        NotificationsScreen.pageId: (context) => const NotificationsScreen(),
-        LikedScreen.pageId: (context) => const LikedScreen(),
+        HomeScreen.id: (context) => const HomeScreen(),
+        NotificationsScreen.id: (context) => const NotificationsScreen(),
+        BookmarkScreen.id: (context) => const BookmarkScreen(),
+        UserScreen.id: (context) => const UserScreen()
       },
     );
   }

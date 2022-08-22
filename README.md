@@ -8,6 +8,7 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 - [hive](https://pub.dev/packages/hive)
 - [provider](https://pub.dev/packages/provider)
 - [geolocator](https://pub.dev/packages/geolocator)
+- [image_picker](https://pub.dev/packages/image_picker)
 - [flutter_local_notifications](flutter_local_notifications)
 
 ## Todo's
@@ -16,12 +17,13 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 - [ ] Login screen
 - [ ] User sign up screen
 - [ ] Hangout sign up screen
-- [ ] Home screen
-- [ ] Notifications screen
-- [ ] Liked Hangout screen
+- [x] Home screen
+- [x] Notifications screen
+- [x] Bookmark screen
+- [x] Account screen
 
 ### Other features
 
-- [ ] Bottom navigation panel
+- [x] Bottom navigation panel
 - [ ] Alerts via push notifications
 - [ ] Connect and fetch data from API

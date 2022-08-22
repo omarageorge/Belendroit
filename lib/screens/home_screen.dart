@@ -4,7 +4,7 @@ import 'package:belendroit/components/offer_card.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  static String pageId = 'home_screen';
+  static String id = 'home_screen';
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +36,11 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: ListView(
               children: const [
+                OfferCard(),
+                OfferCard(),
+                OfferCard(),
+                OfferCard(),
+                OfferCard(),
                 OfferCard(),
               ],
             ),

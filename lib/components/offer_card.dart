@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class OfferCard extends StatelessWidget {
+class OfferCard extends StatefulWidget {
   const OfferCard({Key? key}) : super(key: key);
+
+  @override
+  State<OfferCard> createState() => _OfferCardState();
+}
+
+class _OfferCardState extends State<OfferCard> {
+  bool bookmarked = false;
+
+  void bookmarkHandler() {
+    setState(() {
+      bookmarked = !bookmarked;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +49,53 @@ class OfferCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const <Widget>[
-                    Text(
-                      '30% discounts on beer',
-                      style: TextStyle(
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const <Widget>[
+                      Text(
+                        '30% discount Avengers Endgame movie tickets at showmax cinema',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black87),
-                    ),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Text(
-                      'Jacooz bar',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black54),
-                    )
-                  ],
+                          // color: Colors.blue,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Text(
+                        'Bioviands bar',
+                        maxLines: 1,
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black54),
+                      )
+                    ],
+                  ),
                 ),
-                const Icon(
-                  Icons.favorite,
-                  size: 32.0,
-                  color: Colors.red,
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: bookmarkHandler,
+                    child: bookmarked
+                        ? Icon(
+                            Icons.bookmark_add,
+                            size: 32.0,
+                            color: Colors.black87.withOpacity(0.8),
+                          )
+                        : Icon(
+                            Icons.bookmark_add_outlined,
+                            size: 32.0,
+                            color: Colors.black87.withOpacity(0.8),
+                          ),
+                  ),
                 )
               ],
             ),
