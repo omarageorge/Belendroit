@@ -21,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
       showUnselectedLabels: false,
       selectedFontSize: 0,
       unselectedFontSize: 0,
-      // elevation: 0,
+      elevation: 0,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -32,8 +32,12 @@ class BottomNavBar extends StatelessWidget {
           label: 'Notifications',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: 'Liked',
+          icon: Icon(Icons.bookmark),
+          label: 'Bookmark',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Settings',
         ),
       ],
     );
