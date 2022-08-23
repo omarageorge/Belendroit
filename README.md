@@ -14,7 +14,7 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 ## Todo's
 
 - [ ] Splash screen
-- [ ] Login screen
+- [x] Login screen
 - [ ] User sign up screen
 - [ ] Hangout sign up screen
 - [x] Home screen
