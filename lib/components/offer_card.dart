@@ -22,12 +22,12 @@ class _OfferCardState extends State<OfferCard> {
       margin: const EdgeInsets.only(bottom: 25.0),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[50],
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: const [
             BoxShadow(
               color: Colors.black38,
-              blurRadius: 0.4,
+              blurRadius: 0.2,
               spreadRadius: 0.1,
             ),
           ]),
@@ -35,7 +35,7 @@ class _OfferCardState extends State<OfferCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 200.0,
+            height: 160.0,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage('https://picsum.photos/250?image=9'),
@@ -45,7 +45,7 @@ class _OfferCardState extends State<OfferCard> {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0,),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,7 +59,7 @@ class _OfferCardState extends State<OfferCard> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.w500,
                           // color: Colors.blue,
                           color: Colors.black87,
@@ -73,7 +73,7 @@ class _OfferCardState extends State<OfferCard> {
                         maxLines: 1,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: 12.0,
                             fontWeight: FontWeight.w400,
                             color: Colors.black54),
                       )

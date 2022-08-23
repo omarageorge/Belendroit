@@ -29,8 +29,10 @@ class _NotificationCardState extends State<NotificationCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 18.0,
+              horizontal: 20.0,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,20 +41,17 @@ class _NotificationCardState extends State<NotificationCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        '30% discount Avengers Endgame movie tickets at showmax cinema',
+                        '30% discount on all beers and whiskys',
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 19.0,
+                          fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           color: Colors.black87.withOpacity(0.7),
                         ),
                       ),
                       const SizedBox(
-                        height: 8.0,
-                      ),
-                      const SizedBox(
-                        height: 5.0,
+                        height: 10.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +60,7 @@ class _NotificationCardState extends State<NotificationCard> {
                             children: const [
                               Icon(
                                 Icons.place,
-                                size: 20.0,
+                                size: 14.0,
                               ),
                               SizedBox(
                                 width: 5.0,
@@ -71,7 +70,7 @@ class _NotificationCardState extends State<NotificationCard> {
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
                                 style: TextStyle(
-                                    fontSize: 16.0,
+                                    fontSize: 12.0,
                                     letterSpacing: 0.8,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.black54),
@@ -83,7 +82,7 @@ class _NotificationCardState extends State<NotificationCard> {
                             maxLines: 1,
                             overflow: TextOverflow.clip,
                             style: TextStyle(
-                                fontSize: 16.0,
+                                fontSize: 12.0,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black54),
                           ),
