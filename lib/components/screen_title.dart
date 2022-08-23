@@ -13,7 +13,7 @@ class ScreenTitle extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 35.0,
+          size: 25.0,
           color: Colors.lightBlue,
         ),
         const SizedBox(
@@ -24,7 +24,7 @@ class ScreenTitle extends StatelessWidget {
           style: const TextStyle(
             color: Colors.lightBlue,
             fontWeight: FontWeight.w500,
-            fontSize: 25.0,
+            fontSize: 20.0,
             letterSpacing: 0.8,
           ),
         ),
