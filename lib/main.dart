@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:belendroit/components/bottom_nav.dart';
 import 'package:belendroit/screens/home_screen.dart';
 import 'package:belendroit/screens/bookmark_screen.dart';
 import 'package:belendroit/screens/notifications_screen.dart';
-import 'package:belendroit/screens/user_screen.dart';
+import 'package:belendroit/screens/account_screen.dart';
+import 'package:belendroit/screens/login_screen.dart';
+import 'package:belendroit/screens/navigation_screen.dart';
 
 void main() => runApp(const MainScreen());
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
-
-  final List<Widget> pages = [
-    const HomeScreen(),
-    const NotificationsScreen(),
-    const BookmarkScreen(),
-    const UserScreen()
-  ];
-
-  void onTap(int? index) {
-    setState(() {
-      _currentIndex = index!;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +19,14 @@ class _MainScreenState extends State<MainScreen> {
         inputDecorationTheme:
             const InputDecorationTheme(prefixIconColor: Colors.black54),
       ),
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(child: pages[_currentIndex]),
-        bottomNavigationBar:
-            BottomNavBar(currentIndex: _currentIndex, onTap: onTap),
-      ),
+      initialRoute: '/',
       routes: {
+        '/': (context) => const LoginScreen(),
         HomeScreen.id: (context) => const HomeScreen(),
         NotificationsScreen.id: (context) => const NotificationsScreen(),
         BookmarkScreen.id: (context) => const BookmarkScreen(),
-        UserScreen.id: (context) => const UserScreen()
+        AccountScreen.id: (context) => const AccountScreen(),
+        NavigationScreen.id: (context) => const NavigationScreen()
       },
     );
   }
