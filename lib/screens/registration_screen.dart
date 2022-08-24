@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:belendroit/constants.dart';
+import 'package:belendroit/screens/login_screen.dart';
 import 'package:belendroit/components/route.dart';
-import 'package:belendroit/screens/navigation_screen.dart';
-import 'package:belendroit/screens/registration_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegistrationScreen extends StatelessWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
 
-  static String id = '/';
+  static String id = 'registration_screen';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30.0,
+          padding: const EdgeInsets.only(
+            top: 30.0,
+            left: 30.0,
+            right: 30.0,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Welcome',
+                    'Create an account',
                     style: TextStyle(
                       fontSize: 28.0,
                       fontWeight: FontWeight.w500,
@@ -34,9 +35,17 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 25.0,
+              kSpaceY,
+              TextField(
+                keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
+                decoration: const InputDecoration().copyWith(
+                    prefixIcon: const Icon(
+                      Icons.person,
+                    ),
+                    hintText: 'Name'),
               ),
+              kSpaceY,
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -46,9 +55,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     hintText: 'Email'),
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+              kSpaceY,
               TextField(
                 keyboardType: TextInputType.text,
                 obscureText: true,
@@ -60,23 +67,19 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Password',
                 ),
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+              kSpaceY,
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, NavigationScreen.id);
+                  Navigator.pop(context);
                 },
                 style: kTextButtonStyle,
-                child: const Text('Sign in'),
+                child: const Text('Register'),
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+              kSpaceY,
               Link(
-                text: "Don't have an account?",
-                action: 'Register',
-                route: RegistrationScreen.id,
+                text: "Already have an account?",
+                action: 'Sign in',
+                route: LoginScreen.id,
               ),
             ],
           ),

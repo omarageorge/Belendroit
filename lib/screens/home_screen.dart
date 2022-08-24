@@ -16,18 +16,24 @@ class HomeScreen extends StatelessWidget {
             onSubmitted: (value) {},
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.search,
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
+            decoration: const InputDecoration().copyWith(
+              prefixIcon: const Icon(Icons.search),
               filled: true,
               hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.black54),
-              border: OutlineInputBorder(
+              hintStyle: const TextStyle(color: Colors.black54),
+              enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.all(
                   Radius.circular(12.0),
                 ),
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12.0),
+                ),
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
             ),
           ),
           const SizedBox(

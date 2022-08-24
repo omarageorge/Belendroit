@@ -15,7 +15,7 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 
 - [ ] Splash screen
 - [x] Login screen
-- [ ] User sign up screen
+- [x] User sign up screen
 - [ ] Hangout sign up screen
 - [x] Home screen
 - [x] Notifications screen

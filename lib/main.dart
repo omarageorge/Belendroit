@@ -1,3 +1,4 @@
+import 'package:belendroit/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:belendroit/screens/home_screen.dart';
 import 'package:belendroit/screens/bookmark_screen.dart';
@@ -15,9 +16,22 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Belendroid',
-      theme: ThemeData(
-        inputDecorationTheme:
-            const InputDecorationTheme(prefixIconColor: Colors.black54),
+      theme: ThemeData.light().copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          prefixIconColor: Colors.black54,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.black.withOpacity(0.5),
+              width: 1.0,
+            ),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.blue,
+              width: 1.0,
+            ),
+          ),
+        ),
       ),
       initialRoute: '/',
       routes: {
@@ -26,7 +40,8 @@ class MainScreen extends StatelessWidget {
         NotificationsScreen.id: (context) => const NotificationsScreen(),
         BookmarkScreen.id: (context) => const BookmarkScreen(),
         AccountScreen.id: (context) => const AccountScreen(),
-        NavigationScreen.id: (context) => const NavigationScreen()
+        NavigationScreen.id: (context) => const NavigationScreen(),
+        RegistrationScreen.id: (context) => const RegistrationScreen(),
       },
     );
   }

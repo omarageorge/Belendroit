@@ -37,7 +37,9 @@ class AccountScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.black),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: const Text('Sign out'),
               ),
             ],
