@@ -1,3 +1,4 @@
+import 'package:belendroit/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:belendroit/components/notification_card.dart';
 import 'package:belendroit/components/screen_title.dart';
@@ -10,7 +11,7 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 25.0, left: 30.0, right: 30.0),
+      padding: kScreenPadding,
       child: Column(
         children: [
           const ScreenTitle(

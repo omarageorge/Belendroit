@@ -12,3 +12,9 @@ ButtonStyle kTextButtonStyle = TextButton.styleFrom(
 SizedBox kSpaceY = const SizedBox(
   height: 30.0,
 );
+
+EdgeInsetsGeometry kScreenPadding = const EdgeInsets.only(
+  top: 40.0,
+  left: 20.0,
+  right: 20.0,
+);

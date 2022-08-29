@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:belendroit/components/bottom_nav.dart';
+import 'package:belendroit/widgets/bottom_nav.dart';
 import 'package:belendroit/screens/home_screen.dart';
 import 'package:belendroit/screens/bookmark_screen.dart';
 import 'package:belendroit/screens/notifications_screen.dart';

@@ -1,5 +1,8 @@
+import 'package:belendroit/models/offer_data.dart';
 import 'package:flutter/material.dart';
+import 'package:belendroit/constants.dart';
 import 'package:belendroit/components/offer_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 40.0, left: 30.0, right: 30.0),
+      padding: kScreenPadding,
       child: Column(
         children: [
           TextField(
@@ -40,16 +43,13 @@ class HomeScreen extends StatelessWidget {
             height: 30.0,
           ),
           Expanded(
-            child: ListView(
-              children: const [
-                OfferCard(),
-                OfferCard(),
-                OfferCard(),
-                OfferCard(),
-                OfferCard(),
-                OfferCard(),
-              ],
-            ),
+            child: ListView.builder(
+                itemCount: Provider.of<OfferData>(context).offerCount,
+                itemBuilder: (context, index) {
+                  return OfferCard(
+                    offer: Provider.of<OfferData>(context).offers[index],
+                  );
+                }),
           ),
         ],
       ),

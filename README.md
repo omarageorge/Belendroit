@@ -6,6 +6,9 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 
 - [http](https://pub.dev/packages/http)
 - [hive](https://pub.dev/packages/hive)
+- [firebase_core](https://pub.dev/packages/firebase_core)
+- [cloud_firestore](https://pub.dev/packages/cloud_firestore)
+- [firebase_auth](https://pub.dev/packages/cloud_firestore)
 - [provider](https://pub.dev/packages/provider)
 - [geolocator](https://pub.dev/packages/geolocator)
 - [image_picker](https://pub.dev/packages/image_picker)

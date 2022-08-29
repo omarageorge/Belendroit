@@ -1,6 +1,10 @@
+import 'package:belendroit/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:belendroit/components/screen_title.dart';
+import 'package:provider/provider.dart';
+import 'package:belendroit/models/offer_model.dart';
 import 'package:belendroit/components/offer_card.dart';
+import 'package:belendroit/components/screen_title.dart';
+import 'package:belendroit/models/offer_data.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -10,7 +14,7 @@ class BookmarkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 25.0, left: 30.0, right: 30.0),
+      padding: kScreenPadding,
       child: Column(
         children: <Widget>[
           const ScreenTitle(
@@ -21,14 +25,13 @@ class BookmarkScreen extends StatelessWidget {
             height: 30.0,
           ),
           Expanded(
-            child: ListView(
-              children: const <OfferCard>[
-                OfferCard(),
-                OfferCard(),
-                OfferCard(),
-                OfferCard(),
-              ],
-            ),
+            child: ListView.builder(
+                itemCount: Provider.of<OfferData>(context).savedOfferCount,
+                itemBuilder: (context, index) {
+                  return OfferCard(
+                    offer: Provider.of<OfferData>(context).savedOffers[index],
+                  );
+                }),
           ),
         ],
       ),

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "35299489032",
+    "project_id": "belendroit-3f143",
+    "storage_bucket": "belendroit-3f143.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35299489032:android:762f62a5994ba7df38e8bd",
+        "android_client_info": {
+          "package_name": "com.example.belendroit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35299489032-jp5gb5tjr1kj2etfqv0a3meodvtl5cs5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXUaeLfA6msRlTARU2De4e0085uDpVsB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35299489032-jp5gb5tjr1kj2etfqv0a3meodvtl5cs5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

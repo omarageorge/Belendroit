@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:belendroit/constants.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   static String id = 'account_screen';
 
   @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 25.0, left: 30.0, right: 30.0),
+      padding: kScreenPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -17,16 +26,16 @@ class AccountScreen extends StatelessWidget {
           ),
           Column(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 60.0,
-                backgroundImage:
-                    NetworkImage('https://picsum.photos/250?image=9'),
+                backgroundColor: Colors.grey.shade50,
+                backgroundImage: const AssetImage('images/profile.png'),
               ),
               const SizedBox(
                 height: 20.0,
               ),
               Text(
-                'John Doe',
+                'Jordanah',
                 style: TextStyle(
                     color: Colors.black87.withOpacity(0.8),
                     fontSize: 30.0,
@@ -38,6 +47,7 @@ class AccountScreen extends StatelessWidget {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.black),
                 onPressed: () {
+                  _auth.signOut();
                   Navigator.pop(context);
                 },
                 child: const Text('Sign out'),

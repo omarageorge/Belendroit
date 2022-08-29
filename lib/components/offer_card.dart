@@ -1,21 +1,18 @@
+import 'package:belendroit/models/offer_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:belendroit/models/offer_model.dart';
 
 class OfferCard extends StatefulWidget {
-  const OfferCard({Key? key}) : super(key: key);
+  const OfferCard({Key? key, required this.offer}) : super(key: key);
+
+  final Offer offer;
 
   @override
   State<OfferCard> createState() => _OfferCardState();
 }
 
 class _OfferCardState extends State<OfferCard> {
-  bool bookmarked = false;
-
-  void bookmarkHandler() {
-    setState(() {
-      bookmarked = !bookmarked;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,17 +32,19 @@ class _OfferCardState extends State<OfferCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 160.0,
-            decoration: const BoxDecoration(
+            height: 180.0,
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage('https://picsum.photos/250?image=9'),
+                image: AssetImage('images/${widget.offer.image}'),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 18.0, horizontal: 20.0,),
+            padding: const EdgeInsets.symmetric(
+              vertical: 18.0,
+              horizontal: 15.0,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -53,40 +52,58 @@ class _OfferCardState extends State<OfferCard> {
                   flex: 4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
-                        '30% discount Avengers Endgame movie tickets at showmax cinema',
+                        widget.offer.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 16.0,
+                        style: const TextStyle(
+                          fontSize: 14.0,
                           fontWeight: FontWeight.w500,
                           // color: Colors.blue,
                           color: Colors.black87,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8.0,
                       ),
-                      Text(
-                        'Bioviands bar',
-                        maxLines: 1,
-                        overflow: TextOverflow.clip,
-                        style: TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black54),
-                      )
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.place,
+                            size: 14.0,
+                          ),
+                          const SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            widget.offer.hangout,
+                            maxLines: 2,
+                            overflow: TextOverflow.clip,
+                            style: const TextStyle(
+                                fontSize: 12.0,
+                                letterSpacing: 0.8,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black54),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
                 Expanded(
                   flex: 1,
                   child: GestureDetector(
-                    onTap: bookmarkHandler,
-                    child: bookmarked
+                    onTap: () {
+                      setState(() {
+                        widget.offer.toggleBookmark();
+                        Provider.of<OfferData>(context, listen: false)
+                            .addSaveOffer(widget.offer);
+                      });
+                    },
+                    child: widget.offer.bookmark
                         ? Icon(
-                            Icons.bookmark_add,
+                            Icons.bookmark,
                             size: 32.0,
                             color: Colors.black87.withOpacity(0.8),
                           )
