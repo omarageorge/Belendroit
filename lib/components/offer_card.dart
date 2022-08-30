@@ -113,7 +113,7 @@ class _OfferCardState extends State<OfferCard> {
                             color: Colors.black87.withOpacity(0.8),
                           ),
                   ),
-                )
+                ),
               ],
             ),
           ),
