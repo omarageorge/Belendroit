@@ -21,7 +21,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   late String name;
   late String email;
   late String password;
-  bool role = false;
+  bool admin = false;
   bool signupError = false;
   bool showSpinner = false;
 
@@ -67,7 +67,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Invalid email or password.',
+                        'Sorry, could not register.',
                         style: TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
@@ -175,7 +175,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       uid: user!.uid,
       name: name,
       email: email,
-      role: role,
+      admin: admin,
     );
 
     await firebaseFirestore

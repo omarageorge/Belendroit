@@ -2,13 +2,13 @@ class UserModel {
   String? uid;
   String? name;
   String? email;
-  bool? role;
+  bool? admin;
 
   UserModel({
     this.uid,
     this.name,
     this.email,
-    this.role,
+    this.admin,
   });
 
   factory UserModel.fromMap(map) {
@@ -16,7 +16,7 @@ class UserModel {
       uid: map['uid'],
       name: map['name'],
       email: map['email'],
-      role: map['role'],
+      admin: map['admin'],
     );
   }
 
@@ -25,7 +25,7 @@ class UserModel {
       'uid': uid,
       'name': name,
       'email': email,
-      'role': role,
+      'admin': admin,
     };
   }
 }

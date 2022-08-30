@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:belendroit/models/offer_model.dart';
 
 class OfferData extends ChangeNotifier {
+  // Offers
   final List<Offer> _offers = [
     Offer(
       title: '10% Discounts on all Whiskeys',
