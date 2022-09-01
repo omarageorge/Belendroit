@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:belendroit/constants.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -13,6 +14,31 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String accountName = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    () async {
+      await readUser().then((res) {
+        setState(() {});
+      });
+    }();
+  }
+
+  Future<void> readUser() async {
+    final String uid = _auth.currentUser!.uid;
+
+    CollectionReference<Map<String, dynamic>> users =
+        FirebaseFirestore.instance.collection("users");
+
+    await users.doc(uid).get().then((DocumentSnapshot doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      accountName = data['name'] as String;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +61,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 height: 20.0,
               ),
               Text(
-                'Jordanah',
+                accountName,
                 style: TextStyle(
                     color: Colors.black87.withOpacity(0.8),
                     fontSize: 30.0,

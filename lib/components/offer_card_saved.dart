@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:belendroit/models/offer_model.dart';
 import 'package:provider/provider.dart';
 
-class OfferCard extends StatefulWidget {
-  const OfferCard({Key? key, required this.offer}) : super(key: key);
+class OfferCardSaved extends StatefulWidget {
+  const OfferCardSaved({Key? key, required this.offer}) : super(key: key);
 
   final Offer offer;
 
   @override
-  State<OfferCard> createState() => _OfferCardState();
+  State<OfferCardSaved> createState() => _OfferCardSavedState();
 }
 
-class _OfferCardState extends State<OfferCard> {
+class _OfferCardSavedState extends State<OfferCardSaved> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -95,27 +95,17 @@ class _OfferCardState extends State<OfferCard> {
                   flex: 1,
                   child: GestureDetector(
                     onTap: () {
-                      if (widget.offer.bookmark == true) {
-                        return;
-                      } else {
-                        setState(() {
-                          widget.offer.toggleBookmark();
-                          Provider.of<OfferData>(context, listen: false)
-                              .save(widget.offer);
-                        });
-                      }
+                      setState(() {
+                        widget.offer.toggleBookmark();
+                        Provider.of<OfferData>(context, listen: false)
+                            .removeSaved(widget.offer);
+                      });
                     },
-                    child: widget.offer.bookmark
-                        ? Icon(
-                            Icons.bookmark,
-                            size: 32.0,
-                            color: Colors.black87.withOpacity(0.8),
-                          )
-                        : Icon(
-                            Icons.bookmark_add_outlined,
-                            size: 32.0,
-                            color: Colors.black87.withOpacity(0.8),
-                          ),
+                    child: Icon(
+                      Icons.delete,
+                      size: 32.0,
+                      color: Colors.black87.withOpacity(0.8),
+                    ),
                   ),
                 ),
               ],

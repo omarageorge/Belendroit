@@ -37,16 +37,15 @@ class OfferData extends ChangeNotifier {
     ),
   ];
 
-  final List<Offer> _savedOffers = [];
+  final List<Offer> _saved = [];
 
   int get offerCount => _offers.length;
 
-  int get savedOfferCount => _savedOffers.length;
-
   UnmodifiableListView<Offer> get offers => UnmodifiableListView(_offers);
+  UnmodifiableListView<Offer> get saved => UnmodifiableListView(_saved);
 
-  UnmodifiableListView<Offer> get savedOffers =>
-      UnmodifiableListView(_savedOffers);
+  List<Offer> get getSaved =>
+      _offers.where((offer) => offer.bookmark == true).toList();
 
   void addOffer(Offer newOffer) {
     final Offer offer = Offer(
@@ -59,14 +58,24 @@ class OfferData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addSaveOffer(Offer newSavedOffer) {
-    final Offer savedOffer = Offer(
-      title: newSavedOffer.title,
-      image: newSavedOffer.image,
-      hangout: newSavedOffer.hangout,
+  void save(Offer saved) {
+    final Offer offer = Offer(
+      title: saved.title,
+      image: saved.image,
+      hangout: saved.hangout,
     );
 
-    _savedOffers.add(savedOffer);
+    _saved.add(offer);
+    notifyListeners();
+  }
+
+  void removeOffer(Offer offer) {
+    _offers.remove(offer);
+    notifyListeners();
+  }
+
+  void removeSaved(Offer offer) {
+    _saved.remove(offer);
     notifyListeners();
   }
 }

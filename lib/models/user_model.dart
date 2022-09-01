@@ -1,31 +1,22 @@
 class UserModel {
-  String? uid;
-  String? name;
-  String? email;
-  bool? admin;
+  final String uid;
+  final String name;
+  final String email;
+  final bool admin;
 
   UserModel({
-    this.uid,
-    this.name,
-    this.email,
-    this.admin,
+    required this.uid,
+    required this.name,
+    required this.email,
+    required this.admin,
   });
 
-  factory UserModel.fromMap(map) {
-    return UserModel(
-      uid: map['uid'],
-      name: map['name'],
-      email: map['email'],
-      admin: map['admin'],
-    );
-  }
+  // factory UserModel.fromFireStore
 
-  Map<String, dynamic> toMap() {
-    return {
-      'uid': uid,
-      'name': name,
-      'email': email,
-      'admin': admin,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        "uid": uid,
+        "name": name,
+        "email": email,
+        "admin": admin,
+      };
 }

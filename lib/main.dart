@@ -11,7 +11,7 @@ import 'package:belendroit/screens/registration_screen.dart';
 import 'package:belendroit/screens/notifications_screen.dart';
 import 'package:belendroit/models/offer_data.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

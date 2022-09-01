@@ -1,8 +1,7 @@
 import 'package:belendroit/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:belendroit/models/offer_model.dart';
-import 'package:belendroit/components/offer_card.dart';
+import 'package:belendroit/components/offer_card_saved.dart';
 import 'package:belendroit/components/screen_title.dart';
 import 'package:belendroit/models/offer_data.dart';
 
@@ -26,10 +25,10 @@ class BookmarkScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: Provider.of<OfferData>(context).savedOfferCount,
+                itemCount: Provider.of<OfferData>(context).saved.length,
                 itemBuilder: (context, index) {
-                  return OfferCard(
-                    offer: Provider.of<OfferData>(context).savedOffers[index],
+                  return OfferCardSaved(
+                    offer: Provider.of<OfferData>(context).saved[index],
                   );
                 }),
           ),

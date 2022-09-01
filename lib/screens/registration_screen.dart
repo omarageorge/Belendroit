@@ -1,10 +1,10 @@
+import 'package:belendroit/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:belendroit/constants.dart';
 import 'package:belendroit/widgets/route.dart';
 import 'package:belendroit/screens/login_screen.dart';
-import 'package:belendroit/models/user_model.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -141,7 +141,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           .createUserWithEmailAndPassword(
                               email: email, password: password)
                           .then((value) {
-                        postDataToFireStore();
+                        createUser();
                       }).catchError((e) {
                         setState(() {
                           showSpinner = false;
@@ -167,27 +167,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 
-  postDataToFireStore() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    User? user = _auth.currentUser;
+  Future<void> createUser() async {
+    final String uid = _auth.currentUser!.uid;
 
-    UserModel userModel = UserModel(
-      uid: user!.uid,
+    final DocumentReference<Map<String, dynamic>> userDocument =
+        FirebaseFirestore.instance.collection('users').doc(uid);
+
+    final UserModel newUser = UserModel(
+      uid: uid,
       name: name,
       email: email,
       admin: admin,
     );
 
-    await firebaseFirestore
-        .collection('users')
-        .doc(user.uid)
-        .set(userModel.toMap())
-        .then((data) {
-      Navigator.pop(context);
-    });
+    await userDocument.set(newUser.toJson()).then((value) {
+      setState(() {
+        signupError = false;
+      });
 
-    setState(() {
-      signupError = false;
+      Navigator.pop(context);
     });
   }
 }
