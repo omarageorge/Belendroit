@@ -2,40 +2,9 @@ import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:belendroit/models/offer_model.dart';
 
-class OfferData extends ChangeNotifier {
+class OfferProvider extends ChangeNotifier {
   // Offers
-  final List<Offer> _offers = [
-    Offer(
-      title: '10% Discounts on all Whiskeys',
-      image: 'whiskey.jpg',
-      hangout: 'Thrones Lounge Bar & Restaurant',
-    ),
-    Offer(
-      title: 'Black panther 2 tickets at 10k',
-      image: 'black panther.jpg',
-      hangout: 'Century cinemax',
-    ),
-    Offer(
-      title: 'Get 3 glasses of beer at 12k',
-      image: 'beer.jpg',
-      hangout: 'Ashiana Restaurant',
-    ),
-    Offer(
-      title: '15% off original price for silent disco',
-      image: 'silent disco.jpg',
-      hangout: 'Banana Bar',
-    ),
-    Offer(
-      title: 'Buy 2 plates, get one more free',
-      image: 'pork.jpg',
-      hangout: 'Ariky fresh pork joint',
-    ),
-    Offer(
-      title: 'Save 5k on original price',
-      image: 'burger.jpg',
-      hangout: 'KFC | Bugolobi',
-    ),
-  ];
+  final List<Offer> _offers = [];
 
   final List<Offer> _saved = [];
 

@@ -1,17 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Offer {
-  final String title;
-  final String image;
-  final String hangout;
+  final String? image;
+  final String? title;
+  final String? description;
+  final String? city;
+  final String? hangout;
   late bool bookmark;
 
   Offer({
-    required this.title,
-    required this.image,
-    required this.hangout,
+    this.image,
+    this.title,
+    this.description,
+    this.city,
+    this.hangout,
     this.bookmark = false,
   });
 
   void toggleBookmark() {
     bookmark = !bookmark;
+  }
+
+/* Retrieve data from firestore */
+  factory Offer.fromFireStore(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    final data = snapshot.data();
+
+    return Offer(
+      image: data?['image'],
+      title: data?['title'],
+      description: data?['description'],
+      city: data?['city'],
+      hangout: data?['hangout'],
+    );
   }
 }

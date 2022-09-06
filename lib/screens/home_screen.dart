@@ -1,13 +1,22 @@
-import 'package:belendroit/models/offer_data.dart';
 import 'package:flutter/material.dart';
-import 'package:belendroit/constants.dart';
-import 'package:belendroit/components/offer_card.dart';
 import 'package:provider/provider.dart';
+import 'package:belendroit/constants.dart';
+import 'package:belendroit/models/offer_model.dart';
+import 'package:belendroit/components/offer_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:belendroit/providers/location_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static String id = 'home_screen';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +52,38 @@ class HomeScreen extends StatelessWidget {
             height: 30.0,
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: Provider.of<OfferData>(context).offerCount,
-                itemBuilder: (context, index) {
-                  return OfferCard(
-                    offer: Provider.of<OfferData>(context).offers[index],
+            child: StreamBuilder(
+              stream: _firestore
+                  .collection('offers')
+                  .where('city',
+                      isEqualTo: Provider.of<LocationProvider>(context).city)
+                  .snapshots(),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<QuerySnapshot> snapshot,
+              ) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ),
                   );
-                }),
+                }
+
+                return ListView(
+                  children: snapshot.data!.docs.map((data) {
+                    return OfferCard(
+                        offer: Offer(
+                      image: data['image'],
+                      title: data['title'],
+                      description: data['description'],
+                      city: data['city'],
+                      hangout: data['hangout'],
+                    ));
+                  }).toList(),
+                );
+              },
+            ),
           ),
         ],
       ),

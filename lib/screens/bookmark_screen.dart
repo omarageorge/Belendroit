@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:belendroit/components/offer_card_saved.dart';
 import 'package:belendroit/components/screen_title.dart';
-import 'package:belendroit/models/offer_data.dart';
+import 'package:belendroit/providers/offer_provider.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -25,10 +25,10 @@ class BookmarkScreen extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: Provider.of<OfferData>(context).saved.length,
+                itemCount: Provider.of<OfferProvider>(context).saved.length,
                 itemBuilder: (context, index) {
                   return OfferCardSaved(
-                    offer: Provider.of<OfferData>(context).saved[index],
+                    offer: Provider.of<OfferProvider>(context).saved[index],
                   );
                 }),
           ),

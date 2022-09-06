@@ -1,4 +1,4 @@
-import 'package:belendroit/models/offer_data.dart';
+import 'package:belendroit/providers/offer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:belendroit/models/offer_model.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +35,7 @@ class _OfferCardState extends State<OfferCard> {
             height: 180.0,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/${widget.offer.image}'),
+                image: NetworkImage(widget.offer.image!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -54,7 +54,7 @@ class _OfferCardState extends State<OfferCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        widget.offer.title,
+                        widget.offer.title!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -77,7 +77,7 @@ class _OfferCardState extends State<OfferCard> {
                             width: 5.0,
                           ),
                           Text(
-                            widget.offer.hangout,
+                            widget.offer.hangout!,
                             maxLines: 2,
                             overflow: TextOverflow.clip,
                             style: const TextStyle(
@@ -100,7 +100,7 @@ class _OfferCardState extends State<OfferCard> {
                       } else {
                         setState(() {
                           widget.offer.toggleBookmark();
-                          Provider.of<OfferData>(context, listen: false)
+                          Provider.of<OfferProvider>(context, listen: false)
                               .save(widget.offer);
                         });
                       }

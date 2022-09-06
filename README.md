@@ -12,14 +12,15 @@ A Hangout spot mobile application. It alerts users regarding **Special offers**,
 - [provider](https://pub.dev/packages/provider)
 - [geolocator](https://pub.dev/packages/geolocator)
 - [image_picker](https://pub.dev/packages/image_picker)
-- [flutter_local_notifications](flutter_local_notifications)
+- [geocoding](https://pub.dev/packages/geocoding)
+- [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
 
 ## Todo's
 
 - [ ] Splash screen
 - [x] Login screen
 - [x] User sign up screen
-- [ ] Hangout sign up screen
+- [x] Hangout sign up screen
 - [x] Home screen
 - [x] Notifications screen
 - [x] Bookmark screen

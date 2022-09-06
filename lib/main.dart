@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:belendroit/screens/home_screen.dart';
 import 'package:belendroit/screens/login_screen.dart';
 import 'package:belendroit/screens/account_screen.dart';
@@ -9,7 +9,8 @@ import 'package:belendroit/screens/bookmark_screen.dart';
 import 'package:belendroit/screens/navigation_screen.dart';
 import 'package:belendroit/screens/registration_screen.dart';
 import 'package:belendroit/screens/notifications_screen.dart';
-import 'package:belendroit/models/offer_data.dart';
+import 'package:belendroit/providers/offer_provider.dart';
+import 'package:belendroit/providers/location_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +25,15 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => OfferData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<OfferProvider>(
+          create: (_) => OfferProvider(),
+        ),
+        ChangeNotifierProvider<LocationProvider>(
+          create: (_) => LocationProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Belendroid',
         theme: ThemeData.light().copyWith(
