@@ -6,6 +6,7 @@ import 'package:belendroit/widgets/route.dart';
 import 'package:belendroit/screens/navigation_screen.dart';
 import 'package:belendroit/screens/registration_screen.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:belendroit/helper/location_manager.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -28,13 +29,21 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
 
-    setState(() {});
+    setLocality().then((value) {
+      setState(() {});
 
-    if (_auth.currentUser != null) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.of(context).pushNamed(NavigationScreen.id);
-      });
-    }
+      if (_auth.currentUser != null) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pushNamed(NavigationScreen.id);
+        });
+      }
+    });
+  }
+
+  Future<void> setLocality() async {
+    await LocationManager.requestPermission().then((response) {
+      LocationManager.determineLocality(context);
+    });
   }
 
   @override

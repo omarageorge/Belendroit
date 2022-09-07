@@ -6,16 +6,11 @@ import 'package:belendroit/components/offer_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:belendroit/providers/location_provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  HomeScreen({Key? key}) : super(key: key);
 
   static String id = 'home_screen';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
@@ -55,8 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: StreamBuilder(
               stream: _firestore
                   .collection('offers')
-                  .where('city',
-                      isEqualTo: Provider.of<LocationProvider>(context).city)
+                  .where(
+                    'city',
+                    isEqualTo: Provider.of<LocationProvider>(context).city,
+                  )
+                  .orderBy('created', descending: false)
                   .snapshots(),
               builder: (
                 BuildContext context,

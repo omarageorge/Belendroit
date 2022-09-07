@@ -18,7 +18,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   int _currentIndex = 0;
 
   final List<Widget> pages = [
-    const HomeScreen(),
+    HomeScreen(),
     const NotificationsScreen(),
     const BookmarkScreen(),
     const AccountScreen()

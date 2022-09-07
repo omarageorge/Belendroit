@@ -1,6 +1,6 @@
 import 'firebase_options.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:belendroit/screens/home_screen.dart';
 import 'package:belendroit/screens/login_screen.dart';
@@ -14,9 +14,7 @@ import 'package:belendroit/providers/location_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainScreen());
 }
 
@@ -56,7 +54,7 @@ class MainScreen extends StatelessWidget {
         initialRoute: LoginScreen.id,
         routes: {
           LoginScreen.id: (context) => const LoginScreen(),
-          HomeScreen.id: (context) => const HomeScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
           NotificationsScreen.id: (context) => const NotificationsScreen(),
           BookmarkScreen.id: (context) => const BookmarkScreen(),
           AccountScreen.id: (context) => const AccountScreen(),
