@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class NotificationCard extends StatefulWidget {
-  const NotificationCard({Key? key}) : super(key: key);
+  const NotificationCard(
+      {Key? key,
+      required this.title,
+      required this.hangout,
+      required this.date})
+      : super(key: key);
+
+  final String title;
+  final String hangout;
+  final String date;
 
   @override
   State<NotificationCard> createState() => _NotificationCardState();
@@ -41,7 +50,7 @@ class _NotificationCardState extends State<NotificationCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        '30% discount on all beers and whiskys',
+                        widget.title,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -57,19 +66,19 @@ class _NotificationCardState extends State<NotificationCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.place,
                                 size: 14.0,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5.0,
                               ),
                               Text(
-                                'Bioviands bar',
+                                widget.hangout,
                                 maxLines: 1,
                                 overflow: TextOverflow.clip,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 12.0,
                                     letterSpacing: 0.8,
                                     fontWeight: FontWeight.w500,
@@ -77,11 +86,11 @@ class _NotificationCardState extends State<NotificationCard> {
                               ),
                             ],
                           ),
-                          const Text(
-                            '12/06/22',
+                          Text(
+                            widget.date,
                             maxLines: 1,
                             overflow: TextOverflow.clip,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 12.0,
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black54),

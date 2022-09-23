@@ -19,7 +19,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   final List<Widget> pages = [
     HomeScreen(),
-    const NotificationsScreen(),
+    NotificationsScreen(),
     const BookmarkScreen(),
     const AccountScreen()
   ];

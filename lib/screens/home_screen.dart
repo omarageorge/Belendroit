@@ -5,6 +5,7 @@ import 'package:belendroit/models/offer_model.dart';
 import 'package:belendroit/components/offer_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:belendroit/providers/location_provider.dart';
+import 'package:belendroit/components/screen_title.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -19,30 +20,7 @@ class HomeScreen extends StatelessWidget {
       padding: kScreenPadding,
       child: Column(
         children: [
-          TextField(
-            onSubmitted: (value) {},
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.search,
-            decoration: const InputDecoration().copyWith(
-              prefixIcon: const Icon(Icons.search),
-              filled: true,
-              hintText: 'Search',
-              hintStyle: const TextStyle(color: Colors.black54),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12.0),
-                ),
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12.0),
-                ),
-              ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 5.0),
-            ),
-          ),
+          const ScreenTitle(text: 'Available offers', icon: Icons.home),
           const SizedBox(
             height: 30.0,
           ),
@@ -54,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                     'city',
                     isEqualTo: Provider.of<LocationProvider>(context).city,
                   )
-                  .orderBy('created', descending: false)
+                  // .orderBy('created', descending: false)
                   .snapshots(),
               builder: (
                 BuildContext context,

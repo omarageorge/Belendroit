@@ -55,7 +55,7 @@ class MainScreen extends StatelessWidget {
         routes: {
           LoginScreen.id: (context) => const LoginScreen(),
           HomeScreen.id: (context) => HomeScreen(),
-          NotificationsScreen.id: (context) => const NotificationsScreen(),
+          NotificationsScreen.id: (context) => NotificationsScreen(),
           BookmarkScreen.id: (context) => const BookmarkScreen(),
           AccountScreen.id: (context) => const AccountScreen(),
           NavigationScreen.id: (context) => const NavigationScreen(),

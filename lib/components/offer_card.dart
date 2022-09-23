@@ -2,6 +2,7 @@ import 'package:belendroit/providers/offer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:belendroit/models/offer_model.dart';
 import 'package:provider/provider.dart';
+import 'package:belendroit/screens/offer_screen.dart';
 
 class OfferCard extends StatefulWidget {
   const OfferCard({Key? key, required this.offer}) : super(key: key);
@@ -31,12 +32,22 @@ class _OfferCardState extends State<OfferCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 180.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.offer.image!),
-                fit: BoxFit.cover,
+          GestureDetector(
+            onDoubleTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OfferScreen(offer: widget.offer),
+                ),
+              );
+            },
+            child: Container(
+              height: 180.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(widget.offer.image!),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
