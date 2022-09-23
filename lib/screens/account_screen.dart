@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:belendroit/constants.dart';
+import 'package:belendroit/providers/location_provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -68,10 +70,31 @@ class _AccountScreenState extends State<AccountScreen> {
                     fontWeight: FontWeight.w500),
               ),
               const SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Icon(
+                    Icons.place,
+                    color: Colors.blue,
+                    size: 19.0,
+                  ),
+                  Text(
+                    Provider.of<LocationProvider>(context).city,
+                    style: TextStyle(
+                        color: Colors.black87.withOpacity(0.5),
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              const SizedBox(
                 height: 20.0,
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.black),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 onPressed: () {
                   _auth.signOut();
                   Navigator.pop(context);

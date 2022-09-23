@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 ButtonStyle kTextButtonStyle = TextButton.styleFrom(
+  foregroundColor: Colors.white,
   padding: const EdgeInsets.symmetric(vertical: 20.0),
   backgroundColor: Colors.black,
-  primary: Colors.white,
   textStyle: const TextStyle(
     fontSize: 16.0,
   ),

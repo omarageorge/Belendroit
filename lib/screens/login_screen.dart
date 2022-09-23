@@ -20,9 +20,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  late String email;
-  late String password;
-  bool loginError = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  String errorMessage = '';
+
+  bool showErrorMessage = false;
   bool showSpinner = false;
 
   @override
@@ -44,6 +49,14 @@ class _LoginScreenState extends State<LoginScreen> {
     await LocationManager.requestPermission().then((response) {
       LocationManager.determineLocality(context);
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _emailController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -74,95 +87,104 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 20.0,
+                ),
                 Visibility(
-                  visible: loginError,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  visible: showErrorMessage,
+                  child: Column(
                     children: [
-                      Text(
-                        'Invalid email or password.',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.red[600],
+                      Center(
+                        child: Text(
+                          errorMessage,
+                          style: TextStyle(color: Colors.red[600]),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 15.0,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 25.0,
-                ),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration().copyWith(
-                    prefixIcon: const Icon(
-                      Icons.email,
-                    ),
-                    hintText: 'Email',
-                  ),
-                  onChanged: (value) {
-                    email = value;
-                  },
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                TextField(
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                  textInputAction: TextInputAction.done,
-                  decoration: const InputDecoration().copyWith(
-                    prefixIcon: const Icon(
-                      Icons.password,
-                    ),
-                    hintText: 'Password',
-                  ),
-                  onChanged: (value) {
-                    password = value;
-                  },
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                TextButton(
-                  onPressed: () async {
-                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                            .hasMatch(email) ||
-                        email.isEmpty) {
-                      setState(() {
-                        loginError = true;
-                      });
-                    } else if (password.isEmpty) {
-                      setState(() {
-                        loginError = true;
-                      });
-                    } else {
-                      setState(() {
-                        showSpinner = true;
-                      });
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration().copyWith(
+                          prefixIcon: const Icon(
+                            Icons.email,
+                          ),
+                          hintText: 'Email',
+                        ),
+                        validator: (String? value) {
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value!)) {
+                            return 'Please enter a valid email address.';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
+                        textInputAction: TextInputAction.done,
+                        decoration: const InputDecoration().copyWith(
+                          prefixIcon: const Icon(
+                            Icons.password,
+                          ),
+                          hintText: 'Password',
+                        ),
+                        validator: (String? value) {
+                          if (value!.length < 6) {
+                            return 'Password should contain at least 6 characters.';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              showSpinner = true;
+                            });
 
-                      await _auth
-                          .signInWithEmailAndPassword(
-                              email: email, password: password)
-                          .then((uid) {
-                        Navigator.pushNamed(context, NavigationScreen.id);
+                            await _auth
+                                .signInWithEmailAndPassword(
+                                    email: _emailController.text,
+                                    password: _passwordController.text)
+                                .then((uid) {
+                              setState(() {
+                                showSpinner = false;
+                              });
 
-                        setState(() {
-                          showSpinner = false;
-                          loginError = false;
-                        });
-                      }).catchError((e) {
-                        setState(() {
-                          showSpinner = false;
-                          loginError = true;
-                        });
-                      });
-                    }
-                  },
-                  style: kTextButtonStyle,
-                  child: const Text('Sign in'),
+                              Navigator.pushNamed(context, NavigationScreen.id);
+                            }).catchError((e) {
+                              setState(() {
+                                showSpinner = false;
+                                errorMessage = e.code;
+                                showErrorMessage = true;
+                              });
+                            });
+                          }
+                        },
+                        style: kTextButtonStyle,
+                        child: const Text('Sign in'),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20.0,

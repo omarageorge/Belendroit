@@ -26,12 +26,15 @@ class Link extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, route),
-          child: Text(
-            action,
-            style: const TextStyle(
-                color: Colors.blue,
-                fontSize: 16.0,
-                decoration: TextDecoration.underline),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              action,
+              style: const TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                  decoration: TextDecoration.underline),
+            ),
           ),
         ),
       ],

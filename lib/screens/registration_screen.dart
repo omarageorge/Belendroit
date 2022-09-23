@@ -18,12 +18,23 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  late String name;
-  late String email;
-  late String password;
-  bool admin = false;
-  bool signupError = false;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   bool showSpinner = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,103 +66,96 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ],
                 ),
-                Visibility(
-                  visible: signupError,
-                  child: const SizedBox(
-                    height: 10.0,
-                  ),
-                ),
-                Visibility(
-                  visible: signupError,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Sorry, could not register.',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.red[600],
+                kSpaceY,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      TextFormField(
+                        controller: _nameController,
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration().copyWith(
+                          prefixIcon: const Icon(
+                            Icons.person,
+                          ),
+                          hintText: 'Name',
                         ),
+                        validator: (String? value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              (value.length < 3)) {
+                            return 'Username should contain at least 3 characters.';
+                          }
+                          return null;
+                        },
+                      ),
+                      kSpaceY,
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration().copyWith(
+                          prefixIcon: const Icon(
+                            Icons.email,
+                          ),
+                          hintText: 'Email',
+                        ),
+                        validator: (String? value) {
+                          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                              .hasMatch(value!)) {
+                            return 'Please enter a valid email address.';
+                          }
+                          return null;
+                        },
+                      ),
+                      kSpaceY,
+                      TextFormField(
+                        controller: _passwordController,
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
+                        textInputAction: TextInputAction.done,
+                        decoration: const InputDecoration().copyWith(
+                          prefixIcon: const Icon(
+                            Icons.password,
+                          ),
+                          hintText: 'Password',
+                        ),
+                        validator: (String? value) {
+                          if (value!.length < 6) {
+                            return 'Password should contain at least 6 characters.';
+                          }
+                          return null;
+                        },
+                      ),
+                      kSpaceY,
+                      TextButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              showSpinner = true;
+                            });
+
+                            await _auth
+                                .createUserWithEmailAndPassword(
+                                    email: _emailController.text,
+                                    password: _passwordController.text)
+                                .then((value) {
+                              createUser();
+                            }).catchError((e) {
+                              setState(() {
+                                showSpinner = false;
+                              });
+                            });
+                          }
+                        },
+                        style: kTextButtonStyle,
+                        child: const Text('Register'),
                       ),
                     ],
                   ),
-                ),
-                kSpaceY,
-                TextField(
-                  keyboardType: TextInputType.name,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration().copyWith(
-                    prefixIcon: const Icon(
-                      Icons.person,
-                    ),
-                    hintText: 'Name',
-                  ),
-                  onChanged: (value) {
-                    name = value;
-                  },
-                ),
-                kSpaceY,
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration().copyWith(
-                    prefixIcon: const Icon(
-                      Icons.email,
-                    ),
-                    hintText: 'Email',
-                  ),
-                  onChanged: (value) {
-                    email = value;
-                  },
-                ),
-                kSpaceY,
-                TextField(
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                  textInputAction: TextInputAction.done,
-                  decoration: const InputDecoration().copyWith(
-                    prefixIcon: const Icon(
-                      Icons.password,
-                    ),
-                    hintText: 'Password',
-                  ),
-                  onChanged: (value) {
-                    password = value;
-                  },
-                ),
-                kSpaceY,
-                TextButton(
-                  onPressed: () async {
-                    if (name.isEmpty || email.isEmpty || password.isEmpty) {
-                      setState(() {
-                        signupError = true;
-                      });
-                    } else if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                        .hasMatch(email)) {
-                      setState(() {
-                        signupError = true;
-                      });
-                    } else {
-                      setState(() {
-                        showSpinner = true;
-                      });
-
-                      await _auth
-                          .createUserWithEmailAndPassword(
-                              email: email, password: password)
-                          .then((value) {
-                        createUser();
-                      }).catchError((e) {
-                        setState(() {
-                          showSpinner = false;
-                          signupError = true;
-                        });
-                      });
-                    }
-                  },
-                  style: kTextButtonStyle,
-                  child: const Text('Register'),
                 ),
                 kSpaceY,
                 Link(
@@ -175,16 +179,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     final UserModel newUser = UserModel(
       uid: uid,
-      name: name,
-      email: email,
-      admin: admin,
+      name: _nameController.text,
+      email: _emailController.text,
     );
 
     await userDocument.set(newUser.toJson()).then((value) {
-      setState(() {
-        signupError = false;
-      });
-
       Navigator.pop(context);
     });
   }
