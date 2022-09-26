@@ -33,7 +33,7 @@ class _OfferCardState extends State<OfferCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onDoubleTap: () {
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(

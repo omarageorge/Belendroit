@@ -19,8 +19,7 @@ class NotificationsScreen extends StatelessWidget {
       padding: kScreenPadding,
       child: Column(
         children: [
-          const ScreenTitle(
-              text: 'Notifications', icon: Icons.notifications_active),
+          const ScreenTitle(text: 'Upcoming', icon: Icons.notifications_active),
           const SizedBox(
             height: 30.0,
           ),

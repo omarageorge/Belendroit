@@ -46,16 +46,29 @@ class HomeScreen extends StatelessWidget {
                   );
                 }
 
+                if (snapshot.data!.docs.isEmpty) {
+                  return const Center(
+                    child: Text(
+                      'No offers available in your area.',
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
+                    ),
+                  );
+                }
+
                 return ListView(
                   children: snapshot.data!.docs.map((data) {
+                    print('Displaying data...');
+                    print(data);
+
                     return OfferCard(
-                        offer: Offer(
-                      image: data['image'],
-                      title: data['title'],
-                      description: data['description'],
-                      city: data['city'],
-                      hangout: data['hangout'],
-                    ));
+                      offer: Offer(
+                        image: data['image'],
+                        title: data['title'],
+                        description: data['description'],
+                        city: data['city'],
+                        hangout: data['hangout'],
+                      ),
+                    );
                   }).toList(),
                 );
               },

@@ -37,6 +37,11 @@ class MainScreen extends StatelessWidget {
         theme: ThemeData.light().copyWith(
           inputDecorationTheme: InputDecorationTheme(
             prefixIconColor: Colors.black54,
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(
+                width: 1.0,
+              ),
+            ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.black.withOpacity(0.5),
@@ -46,6 +51,18 @@ class MainScreen extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.blue,
+                width: 1.0,
+              ),
+            ),
+            errorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 1.0,
+              ),
+            ),
+            focusedErrorBorder: const OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red,
                 width: 1.0,
               ),
             ),

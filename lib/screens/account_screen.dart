@@ -76,10 +76,10 @@ class _AccountScreenState extends State<AccountScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Icon(
+                  Icon(
                     Icons.place,
-                    color: Colors.blue,
-                    size: 19.0,
+                    color: Colors.red[400],
+                    size: 17.0,
                   ),
                   Text(
                     Provider.of<LocationProvider>(context).city,

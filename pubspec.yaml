@@ -24,6 +24,7 @@ dependencies:
   firebase_auth: ^3.6.4
   modal_progress_hud_nsn: ^0.3.0
   geocoding: ^2.0.5
+  flutter_native_splash: ^2.2.9
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +37,14 @@ flutter:
 
   assets:
     - images/profile.png
+
+flutter_native_splash:
+  color: '#ffffff'
+  image: assets/splash.png
+
+  android: true
+  ios: false
+  web: false
+
+  android_gravity: center
+  fullscreen: true
