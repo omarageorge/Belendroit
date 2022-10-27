@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:belendroit/models/offer_model.dart';
 
 class OfferScreen extends StatelessWidget {
@@ -8,8 +9,17 @@ class OfferScreen extends StatelessWidget {
 
   final Offer offer;
 
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    Uri url = Uri.parse('https://flutter.dev');
+    // Uri url = Uri.parse(offer.url!);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Offer Screen'),
@@ -34,8 +44,8 @@ class OfferScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       offer.title!,
@@ -44,30 +54,35 @@ class OfferScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500,
-                        // color: Colors.blue,
                         color: Colors.black87,
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.place,
-                          size: 14.0,
-                        ),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(
-                          offer.hangout!,
-                          maxLines: 2,
-                          overflow: TextOverflow.clip,
-                          style: const TextStyle(
-                              fontSize: 12.0,
-                              letterSpacing: 0.8,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black54),
-                        ),
-                      ],
+                    const SizedBox(height: 10.0),
+                    GestureDetector(
+                      onTap: () {
+                        _launchUrl(url);
+                      },
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.place,
+                            size: 14.0,
+                          ),
+                          const SizedBox(
+                            width: 2.0,
+                          ),
+                          Text(
+                            offer.hangout!,
+                            maxLines: 2,
+                            overflow: TextOverflow.clip,
+                            style: const TextStyle(
+                                fontSize: 14.0,
+                                letterSpacing: 0.8,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black54),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

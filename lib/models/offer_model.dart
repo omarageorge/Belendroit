@@ -17,6 +17,8 @@ class Offer {
     this.bookmark = false,
   });
 
+  get url => null;
+
   void toggleBookmark() {
     bookmark = !bookmark;
   }
