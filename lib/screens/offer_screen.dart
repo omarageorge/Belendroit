@@ -17,8 +17,7 @@ class OfferScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Uri url = Uri.parse('https://flutter.dev');
-    // Uri url = Uri.parse(offer.url!);
+    Uri url = Uri.parse(offer.url!);
 
     return Scaffold(
       appBar: AppBar(
